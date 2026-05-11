@@ -1,0 +1,72 @@
+COSTUSOFT CONTROL - RESULTADOS, METODOLOGÍA Y CONCLUSIONES
+
+TIPO DE INVESTIGACIÓN
+
+Esta investigación hace parte del paradigma positivista. La metodología empleada es cuantitativa, de tipo explicativa, porque busca establecer relaciones de causa-efecto entre las variables, comprendiendo las causas que influyen en la eficiencia del inventario de insumos en empresas de confecciones.
+
+TÉCNICAS DE RECOLECCIÓN DE INFORMACIÓN
+
+Entrevista: Se realizó con la administradora Piedad Gómez Lara para comprender las problemáticas actuales en la gestión del inventario.
+Observación: Análisis directo del entorno de trabajo, evaluando procesos manuales y registros existentes.
+Revisión Documental: Se revisaron formatos y registros manuales utilizados para el manejo de inventarios.
+
+PREGUNTAS DE LA ENTREVISTA
+
+- ¿Cuáles son los mayores retos con la gestión del inventario?
+- ¿Cómo lleva actualmente el control de los insumos disponibles?
+- ¿Qué funcionalidades considera esenciales en un sistema automatizado de inventarios?
+- ¿Qué información le gustaría ver rápidamente sobre los insumos?
+- ¿Necesita saber cuáles insumos están a punto de acabarse?
+- ¿Se le han acabado insumos importantes sin darse cuenta?
+- ¿Le sería útil recibir alertas cuando un insumo esté por acabarse?
+- ¿Necesita generar reportes para analizar el inventario?
+- ¿Quién debería tener acceso al sistema de inventario?
+
+RESULTADOS OBTENIDOS POR COMPONENTE
+
+Backend API REST - Spring Boot 3.3:
+El backend cuenta con 14 módulos REST completamente operativos que gestionan inventario, pedidos, entradas y salidas de stock, colegios, proveedores, uniformes, reportes, calculadora de disponibilidad y el agente IA. La base de datos relacional tiene 16 tablas en PostgreSQL 16 en Supabase Cloud. La seguridad fue implementada con Spring Security y tokens JWT firmados con HMAC-SHA512.
+
+Frontend - Next.js 16:
+El frontend ofrece autenticación mediante JWT en cookies (cs_token), middleware de rutas protegidas y tres paneles diferenciados por rol. El módulo de IA permite consultas en lenguaje natural o selección entre 9 tipos de consulta predefinidos. La interfaz de predicciones visualiza los resultados de Prophet y XGBoost.
+
+Microservicio de Predicción - Python FastAPI:
+Prophet analiza 365 días de historial de salidas de insumos para generar pronósticos de agotamiento. XGBoost clasifica el nivel de riesgo en BAJO, MEDIO, ALTO y CRÍTICO considerando stock actual, stock mínimo, velocidad de consumo y días hasta agotamiento proyectado. El reentrenamiento automático ocurre a las 2:00 AM UTC diariamente.
+
+Agente de Inteligencia Artificial - Groq + LLaMA 3.3:
+Chatbot funcional en español con 9 modos de consulta predefinidos, generación automática de órdenes de compra y briefing ejecutivo diario. Cada solicitud construye un snapshot completo del estado del inventario en tiempo real como contexto para el modelo LLaMA 3.3 70B.
+
+Calculadora Textil - Funcionalidad Innovadora:
+La validación con pedidos reales del taller confirmó una coincidencia superior al 95% entre valores calculados por el sistema y los valores manuales de la administradora. El módulo de calculadora de disponibilidad (CalculadoraController.java) permite verificar si el inventario actual es suficiente para atender un pedido.
+
+VALIDACIÓN TÉCNICA DEL MÓDULO CALCULADORA TEXTIL
+
+Se realizaron pruebas comparativas entre los cálculos manuales de la administradora y los resultados generados automáticamente por el sistema. Se utilizaron diferentes tipos de uniformes escolares y tallas. Los resultados demostraron una coincidencia superior al 95%, confirmando la confiabilidad y estabilidad de la herramienta.
+
+ESTADO DE LOS OBJETIVOS
+
+- Análisis de requerimientos: CUMPLIDO
+- Diseño de arquitectura: CUMPLIDO
+- Backend Spring Boot: CUMPLIDO
+- Frontend Next.js: CUMPLIDO
+- Microservicio de predicción: CUMPLIDO
+- Agente de IA con Groq: CUMPLIDO
+- Pruebas funcionales y de integración: PARCIALMENTE CUMPLIDO
+- Implementación en producción y capacitación: EN CURSO
+
+ANTECEDENTES RELEVANTES
+
+Internacional - Bolivia (2017): Aplicativo web de gestión y control de inventarios para empresa AGADON S.R.L., demostrando que la sistematización permite mejor control de productos en almacenes.
+Internacional - México (2020): Prototipo de sistema de control de inventario para Ryder, reduciendo tiempo de contabilización y eliminando registro manual en Excel.
+Internacional - España (2023): Estudio que demostró que la incorporación de modelos Prophet puede reducir hasta 40% los episodios de desabastecimiento en empresas con demanda estacional.
+Nacional - Cali (2020): Aplicativo web para gestión de inventario en ChoriRico, sistematizando procesos de almacenamiento y envío.
+Nacional - Bogotá (2021): Prototipo de registro y control de inventario para empresa Ke-nice's, logrando adecuado manejo de stock con información en tiempo real.
+Nacional - Barranquilla (2024): Revisión sistemática de la Universidad del Norte concluyendo que las arquitecturas de microservicios presentan mayor resiliencia y escalamiento frente a aplicaciones monolíticas.
+
+CONCLUSIONES
+
+El desarrollo de CostuSoft Control ha evidenciado la capacidad del equipo para construir un sistema de información real, funcional y con impacto directo en una pequeña empresa del sector textil de Cartagena. Los resultados demuestran que es posible combinar tecnologías modernas como Spring Boot 3.3, Next.js 16, Python FastAPI, Prophet, XGBoost y LLaMA 3.3 en un sistema cohesivo y funcional dentro de un proyecto académico.
+
+La migración de MongoDB a PostgreSQL 16 en Supabase permitió un modelo de datos relacional más robusto con integridad referencial entre las 16 tablas del sistema. La incorporación del chatbot con LLaMA 3.3 70B representa el aporte diferenciador más significativo del semestre, transformando a CostuSoft Control en un sistema que no solo registra y controla el inventario, sino que también interpreta su estado y asiste activamente a la administradora en la toma de decisiones estratégicas.
+
+Los objetivos pendientes para el VIII semestre son: pruebas de integración exhaustivas, despliegue completo en producción y capacitación al usuario, lo que consolidará el impacto tecnológico y organizacional de CostuSoft Control en la empresa.

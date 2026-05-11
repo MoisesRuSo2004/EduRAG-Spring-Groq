@@ -1,5 +1,62 @@
-El proyecto de aula es una estrategia académica que integra conocimientos de varias asignaturas alrededor de un producto funcional. En el contexto de Desarrollo Web Avanzado, el proyecto debe evidenciar una aplicación web con frontend, backend, base de datos y una integración tecnológica relevante.
+COSTUSOFT CONTROL - SISTEMA INTEGRADO DE GESTIÓN DE INVENTARIOS
 
-Para una demostración académica, el proyecto debe incluir planteamiento del problema, objetivos, arquitectura, modelo de datos, funcionalidades implementadas, pruebas y conclusiones.
+Proyecto: Desarrollo de un Aplicativo Web para la Gestión del Inventario de la Empresa Taller de Confecciones La Señora Piedad.
+Nombre del sistema: CostuSoft Control
+Integrantes: Johan Avendaño Cabrera, José Angel Hernández Salcedo, Moisés Ruiz Soracá
+Institución: Fundación Universitaria Tecnológico Comfenalco - Ingeniería de Sistemas, VII Semestre
+Docentes: Jeamy Tarazona Jimenez, Walter Espriella Castellar, Fabio Garcia Ramirez
+Fecha: 12 de abril de 2026
 
-Cuando se integra inteligencia artificial, es importante explicar qué datos usa el sistema, cómo se protege la información y qué papel cumple el modelo de lenguaje dentro de la arquitectura.
+DESCRIPCIÓN DEL PROYECTO
+
+CostuSoft Control nació como una solución tecnológica orientada a digitalizar la gestión del inventario del Taller de Confecciones La Señora Piedad, una empresa familiar cartagenera dedicada a la fabricación de uniformes escolares. El sistema evolucionó de una aplicación monolítica con Spring Boot y MongoDB hacia una arquitectura de microservicios compuesta por cinco capas tecnológicas.
+
+DESCRIPCIÓN DEL PROBLEMA
+
+La empresa "Taller de confecciones la señora Piedad" enfrenta desafíos significativos por su dependencia de un sistema de registro manual. Durante más de 30 años ha utilizado cuadernos y hojas de papel para gestionar su inventario, generando consecuencias negativas en su eficiencia y rentabilidad.
+
+Problemas identificados:
+- Falta de precisión en el control del inventario
+- Problemas en la planificación de la producción y seguimiento de pedidos
+- Retrasos en la entrega de productos y baja satisfacción del cliente
+- Toma de decisiones comprometida por ausencia de datos actualizados
+- Acumulación de inventario obsoleto o dañado
+- Riesgo de pérdida o robo de insumos no detectados
+- Estimación manual de insumos por prenda (telas, hilos, botones) según talla y tipo de uniforme
+
+PREGUNTA PROBLEMA
+
+¿Cómo desarrollar un aplicativo web para la gestión integral del inventario, la predicción de desabastecimiento y la asistencia mediante inteligencia artificial en la empresa Taller de Confecciones de la Señora Piedad?
+
+JUSTIFICACIÓN
+
+La implementación de un aplicativo web de inventario personalizado ofrece una solución integral que optimizará los procesos de la empresa, generando ahorros de tiempo y dinero. La viabilidad técnica fue demostrada durante el VII semestre mediante la construcción e integración de cinco componentes funcionales: frontend operativo con roles diferenciados en Next.js, una API REST con 14 módulos en Spring Boot 3.3, un microservicio de predicción en Python FastAPI con modelos Prophet y XGBoost, un agente de IA con LLaMA 3.3 a través de Groq, y una base de datos PostgreSQL desplegada en Supabase Cloud.
+
+OBJETIVO GENERAL
+
+Desarrollar un aplicativo web integrado para la gestión del inventario, la predicción de desabastecimiento y la asistencia mediante inteligencia artificial en la empresa Taller de Confecciones La Señora Piedad, ubicada en Cartagena, Colombia.
+
+OBJETIVOS ESPECÍFICOS
+
+1. Analizar los requerimientos funcionales y no funcionales para la gestión de inventario. (CUMPLIDO)
+2. Diseñar la arquitectura del sistema, incluyendo el modelo de base de datos relacional, los flujos de usuario y los contratos de la API REST. (CUMPLIDO)
+3. Codificar el backend con Spring Boot 3.3 con módulos REST, seguridad JWT y RBAC, exportación de reportes en PDF y Excel, e integración con PostgreSQL. (CUMPLIDO)
+4. Desarrollar el frontend con Next.js y TypeScript, con interfaces diferenciadas para los tres roles de usuario. (CUMPLIDO)
+5. Integrar un microservicio de predicción en Python FastAPI con Prophet y XGBoost para pronóstico de agotamiento y clasificación de riesgo en niveles BAJO, MEDIO, ALTO y CRÍTICO. (CUMPLIDO)
+6. Implementar un agente de IA basado en LLaMA 3.3 a través de la API de Groq, con capacidad de respuesta en lenguaje natural. (CUMPLIDO)
+7. Realizar pruebas funcionales, unitarias y de integración. (PARCIALMENTE CUMPLIDO)
+8. Implementar el aplicativo en el entorno operativo del taller y capacitar a la administradora. (EN CURSO)
+
+MARCO CONTEXTUAL
+
+La empresa taller de confecciones la señora Piedad es un negocio dedicado a la fabricación de uniformes escolares. Depende de una adecuada gestión de insumos como telas, hilos, botones y otros materiales. La arquitectura actual del sistema con frontend Next.js, backend Spring Boot, microservicio de predicción Python y chatbot IA con Groq representa la maduración tecnológica del prototipo original, convirtiendo a CostuSoft en una plataforma integral que digitaliza el inventario, anticipa desabastecimientos y asiste a la administradora mediante inteligencia artificial.
+
+POBLACIÓN Y MUESTRA
+
+La población objeto de investigación corresponde a los integrantes del área administrativa y operativa del taller (4 personas). La muestra elegida fue la administradora, la señora Piedad Gómez Lara, quien es la principal responsable de gestionar el inventario y tomar decisiones relacionadas con los insumos.
+
+CRONOGRAMA DEL PROYECTO
+
+- Semestres anteriores: Análisis de requisitos, diseño de base de datos con MongoDB, desarrollo backend prototipo inicial, Calculadora Textil.
+- VII Semestre (2025-I): Diseño de base de datos PostgreSQL con 16 tablas, backend completo con 14 módulos REST, frontend Next.js con 3 roles, microservicio Python FastAPI, integración IA Groq + LLaMA 3.3. Base de datos operativa en Supabase Cloud.
+- VIII Semestre (2025-II): Pruebas de integración exhaustivas, despliegue completo en producción, capacitación al usuario, entrega final.

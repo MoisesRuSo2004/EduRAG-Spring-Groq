@@ -1,0 +1,62 @@
+COSTUSOFT CONTROL - ARQUITECTURA TÉCNICA Y TECNOLOGÍAS
+
+ARQUITECTURA DEL SISTEMA
+
+CostuSoft Control utiliza una arquitectura de microservicios compuesta por cinco capas tecnológicas:
+1. Frontend moderno en Next.js 16 con TypeScript y tres roles de usuario: Administrador, Usuario y Bodega.
+2. Backend API REST en Spring Boot 3.3 con seguridad JWT y control de acceso por roles (RBAC).
+3. Microservicio de predicción en Python FastAPI con modelos Prophet y XGBoost.
+4. Agente de inteligencia artificial integrado mediante la API de Groq con el modelo LLaMA 3.3 70B.
+5. Base de datos relacional PostgreSQL 16 desplegada en Supabase Cloud (AWS us-east-1).
+
+BACKEND - SPRING BOOT 3.3
+
+El backend desarrollado en Spring Boot 3.3 con Java 17 cuenta con 14 módulos REST que gestionan inventario, pedidos, entradas y salidas de stock, colegios, proveedores, uniformes, reportes, calculadora de disponibilidad y el agente IA. La seguridad utiliza Spring Security con tokens JWT firmados con HMAC-SHA512, con expiración de 24 horas en desarrollo y 1 hora en producción. El control de acceso por roles (RBAC) usa las anotaciones @PreAuthorize con los roles ADMIN, USER y BODEGA. La capa de datos emplea MapStruct para conversión entre entidades JPA y DTOs. Se generan exportaciones de reportes en PDF (OpenPDF) y Excel (Apache POI).
+
+FRONTEND - NEXT.JS 16
+
+El frontend en Next.js 16 con TypeScript ofrece autenticación mediante JWT almacenado en cookies (cs_token), middleware de rutas protegidas y tres paneles diferenciados por rol:
+- Panel Administrador: gestión total del sistema, CRUD de entidades, reportes y dashboards de inteligencia de negocios.
+- Panel Colegio (Usuario): gestión de pedidos y solicitudes de uniformes con verificación de disponibilidad en tiempo real.
+- Panel Bodega: registro de entradas y salidas de stock con trazabilidad completa.
+El módulo de IA permite escribir preguntas en lenguaje natural o seleccionar entre 9 tipos de consulta predefinidos. La interfaz de predicciones visualiza los modelos Prophet y XGBoost con gráficos interactivos que muestran el nivel de riesgo por insumo.
+
+MICROSERVICIO DE PREDICCIÓN - PYTHON FASTAPI
+
+El microservicio de predicción en Python con FastAPI implementa dos modelos de machine learning:
+- Prophet: analiza series temporales de consumo histórico (365 días de historial de salidas) para generar pronósticos de agotamiento con descomposición de tendencia y estacionalidad.
+- XGBoost: clasifica el nivel de riesgo de cada insumo en cuatro categorías: BAJO, MEDIO, ALTO y CRÍTICO, considerando stock actual, stock mínimo, velocidad de consumo y días hasta agotamiento proyectado.
+El microservicio se comunica con la base de datos PostgreSQL de Supabase mediante SQLAlchemy. Un programador APScheduler ejecuta el reentrenamiento automático de ambos modelos cada día a las 2:00 AM UTC. El microservicio fue dockerizado para facilitar su despliegue.
+
+AGENTE DE INTELIGENCIA ARTIFICIAL - GROQ + LLAMA 3.3
+
+El agente de IA implementado en IaController.java expone seis endpoints REST:
+- POST /api/ia/consultar: consultas predefinidas sobre el inventario
+- POST /api/ia/chat: chat libre en lenguaje natural
+- POST /api/ia/orden-compra: generación automática de órdenes de compra
+- GET /api/ia/briefing: briefing ejecutivo diario
+
+Cada solicitud es procesada por IaService.java, que construye un snapshot completo del estado del inventario en tiempo real y lo envía como contexto al modelo LLaMA 3.3 70B a través de GroqClient.java. El sistema implementa detección de intentos de prompt injection y garantiza que el agente opere exclusivamente en modo de lectura. El tier gratuito de Groq permite hasta 14,400 solicitudes diarias. LLaMA 3.3 es un modelo de código abierto desarrollado por Meta AI, con 70 mil millones de parámetros.
+
+BASE DE DATOS - POSTGRESQL 16 Y SUPABASE
+
+La base de datos relacional cuenta con 16 tablas en PostgreSQL 16 desplegadas en Supabase Cloud (AWS us-east-1), con conexión pooled mediante PgBouncer en el puerto 6543, cifrado SSL obligatorio y configuración de zona horaria UTC. La base de datos es compartida entre el backend Spring Boot (via Spring Data JPA) y el microservicio Python (via SQLAlchemy).
+
+SEGURIDAD - JWT Y RBAC
+
+JWT (JSON Web Token) es un estándar abierto (RFC 7519) para transmitir información de forma segura. En CostuSoft, Spring Security implementa autenticación JWT con firma HMAC-SHA512. Los tres roles definidos son ADMIN (acceso total), USER (gestión de pedidos) y BODEGA (entradas y salidas de stock). Se utiliza BCrypt para hash de contraseñas.
+
+CALCULADORA TEXTIL - FUNCIONALIDAD INNOVADORA
+
+La Calculadora Textil calcula automáticamente los insumos necesarios para fabricar cada pedido. Permite:
+- Seleccionar el tipo de prenda (uniforme de diario o educación física)
+- Registrar características específicas como tipo, género y talla
+- Calcular automáticamente la cantidad exacta de tela, hilos y accesorios requeridos
+- Generar una lista de insumos por prenda y por pedido
+Las fórmulas residen en la tabla uniforme_insumos de PostgreSQL con columnas para uniforme_id, insumo_id, talla, cantidad_base, unidad_medida y timestamps de auditoría. La validación con pedidos reales confirmó una precisión superior al 95%.
+
+MARCO LEGAL
+
+- Ley 1581 de 2012: Protección de datos personales. CostuSoft incorpora controles de acceso, autenticación JWT y hash de contraseñas con BCrypt.
+- Ley 1273 de 2009: Delitos informáticos. El módulo de detección de prompt injection y el control de acceso por roles contribuyen a la prevención de accesos no autorizados.
+- ISO/IEC 27001: Seguridad de la información. El diseño de seguridad sigue los principios de confidencialidad, integridad y disponibilidad.
